@@ -1,11 +1,11 @@
-f=imread('lena.jpg'); %ÀÌ¹ÌÁö ÆÄÀÏÀ» ÀÐ¾î º¯¼ö f¿¡ Çà·ÄÇüÅÂ·Î ÀúÀå
-imshow(f); %¿øº» Ãâ·Â
+f=imread('lena.jpg'); %ì´ë¯¸ì§€ íŒŒì¼ì„ ì½ì–´ ë³€ìˆ˜ fì— í–‰ë ¬í˜•íƒœë¡œ ì €ìž¥
+imshow(f); %ì›ë³¸ ì¶œë ¥
 
-%¿ÞÂÊÀ¸·Î 180µµ È¸ÀüÇÑ ÀÌ¹ÌÁö Ãâ·Â
-f1=f'; %fÀÇ ÀüÄ¡Çà·Ä => ¿ÞÂÊÀ¸·Î 180µµ È¸ÀüÇÑ ÀÌ¹ÌÁöÀÇ Çà·Ä
-figure,imshow(f1); %f1 Ãâ·Â
+%ì™¼ìª½ìœ¼ë¡œ 180ë„ íšŒì „í•œ ì´ë¯¸ì§€ ì¶œë ¥
+f1=f'; %fì˜ ì „ì¹˜í–‰ë ¬ => ì™¼ìª½ìœ¼ë¡œ 90ë„ íšŒì „í•œ ì´ë¯¸ì§€ì˜ í–‰ë ¬
+figure,imshow(f1); %f1 ì¶œë ¥
 
-%¿À¸¥ÂÊÀ¸·Î 180µµ È¸ÀüÇÑ ÀÌ¹ÌÁö Ãâ·Â
-f2=f1(:,end:-1:1); %fÀÇ ÀüÄ¡Çà·ÄÀ» ÀÌ¿ëÇØ ¿À¸¥ÂÊÀ¸·Î 180µµ È¸ÀüÇÑ ÀÌ¹ÌÁöÀÇ Çà·Ä »ý¼º.
-figure, imshow(f2); %f2 Ãâ·Â
+%ì˜¤ë¥¸ìª½ìœ¼ë¡œ 180ë„ íšŒì „í•œ ì´ë¯¸ì§€ ì¶œë ¥
+f2=f1(:,end:-1:1); %fì˜ ì „ì¹˜í–‰ë ¬ì„ ì´ìš©í•´ ì˜¤ë¥¸ìª½ìœ¼ë¡œ 90ë„ íšŒì „í•œ ì´ë¯¸ì§€ì˜ í–‰ë ¬ ìƒì„±.
+figure, imshow(f2); %f2 ì¶œë ¥
 
