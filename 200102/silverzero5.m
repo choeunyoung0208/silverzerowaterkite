@@ -1,31 +1,30 @@
-f=imread('lena.jpg'); %ÀÌ¹ÌÁö ÆÄÀÏÀ» ÀÐ¾î º¯¼ö f¿¡ ÀúÀå
-imshow(f); %¿øº» Ãâ·Â
+f=imread('lena.jpg'); %ì´ë¯¸ì§€ íŒŒì¼ì„ ì½ì–´ ë³€ìˆ˜ fì— ì €ìž¥
+imshow(f); %ì›ë³¸ ì¶œë ¥
 
-%imrotate(f, angle) ¸í·ÉÀ» ÀÌ¿ëÇØ ÁÖ¾îÁø ¿µ»ó È¸Àü. 
-%f : È¸Àü½ÃÅ°°íÀÚ ÇÏ´Â ¿µ»ó 
-%angle : ¿µ»óÀ» ¾ó¸¶³ª È¸ÀüÇÒÁö °áÁ¤ÇØÁÜ. 
-%angle=0 : È¸ÀüÇÏÁö ¾ÊÀ½
-%angle>0 : ¹Ý½Ã°è¹æÇâÀ¸·Î angle°ª ¸¸Å­ È¸Àü
-%angle<0 : ½Ã°è¹æÇâÀ¸·Î angle°ª ¸¸Å­ È¸Àü
+%imrotate(f, angle) ëª…ë ¹ì„ ì´ìš©í•´ ì£¼ì–´ì§„ ì˜ìƒ íšŒì „. 
+%f : íšŒì „ì‹œí‚¤ê³ ìž í•˜ëŠ” ì˜ìƒ 
+%angle : ì˜ìƒì„ ì–¼ë§ˆë‚˜ íšŒì „í• ì§€ ê²°ì •í•´ì¤Œ. 
+%angle=0 : íšŒì „í•˜ì§€ ì•ŠìŒ
+%angle>0 : ë°˜ì‹œê³„ë°©í–¥ìœ¼ë¡œ angleê°’ ë§Œí¼ íšŒì „
+%angle<0 : ì‹œê³„ë°©í–¥ìœ¼ë¡œ angleê°’ ë§Œí¼ íšŒì „
 
-g1=imrotate(f,45); %ÁÖ¾îÁø ¿µ»óÀ» ¹Ý½Ã°è¹æÇâÀ¸·Î 45µµ È¸Àü
-figure, imshow(g1); %¹Ý½Ã°è¹æÇâÀ¸·Î 45µµ È¸Àü½ÃÅ² ¿µ»ó Ãâ·Â
-%¡Ú¡Ú¡Ú¡Ú¡Úf¸¦ ¹Ý½Ã°è¹æÇâÀ¸·Î 45µµ È¸Àü½ÃÅ² °á°ú¸¦ g1¿¡ÇÒ´çÇÑ °ÍÀ» ¹ÙÅÁÀ¸·Î 45µµ¸¸Å­ ´õ È¸ÀüÇÏ¸é ¹Ý½Ã°è¹æÇâÀ¸·Î 90µµ È¸ÀüµÈ ¿µ»óÀÌ Ãâ·ÂµÇÁö¾ÊÀ»±î ÇÏ´Â »ý°¢ÀÌ µé¾î¼­
-%g8=imrotate(g1,45);¸í·ÉÀ» ÀÌ¿ëÇÏ¿© È¸Àü °¡´ÉÇÒ°Å¶ó »ý°¢Çß´Âµ¥ ¿À·ù°¡ ¶¹½À´Ï´Ù. ¾ÈµÇ³ª º¾´Ï´Ù...ÇÑ¹ø °í¹ÎÇØº¸°Ú½À´Ï´Ù¡Ú¡Ú¡Ú¡Ú¡Ú
+g1=imrotate(f,45); %ì£¼ì–´ì§„ ì˜ìƒì„ ë°˜ì‹œê³„ë°©í–¥ìœ¼ë¡œ 45ë„ íšŒì „
+figure, imshow(g1); %ë°˜ì‹œê³„ë°©í–¥ìœ¼ë¡œ 45ë„ íšŒì „ì‹œí‚¨ ì˜ìƒ ì¶œë ¥
 
-g2=imrotate(f,90); %ÁÖ¾îÁø ¿µ»óÀ» ¹Ý½Ã°è¹æÇâÀ¸·Î 90µµ È¸Àü
+g2=imrotate(f,90); %ì£¼ì–´ì§„ ì˜ìƒì„ ë°˜ì‹œê³„ë°©í–¥ìœ¼ë¡œ 90ë„ íšŒì „
+g8=imrotate(g1,45); %fë¥¼ ë°˜ì‹œê³„ë°©í–¥ìœ¼ë¡œ 45ë„ íšŒì „ì‹œí‚¨ ê²°ê³¼ë¥¼ g1ì—í• ë‹¹í•œ ê²ƒì„ ë°”íƒ•ìœ¼ë¡œ 45ë„ë§Œí¼ ë” íšŒì „ì‹œí‚¤ëŠ” ê²ƒë„ ë°˜ì‹œê³„ë°©í–¥ìœ¼ë¡œ 90ë„ íšŒì „ëœ ì˜ìƒìœ¼ë¡œ ì¶œë ¥ë¨
 
-g3=imrotate(f,180); %ÁÖ¾îÁø ¿µ»óÀ» ¹Ý½Ã°è¹æÇâÀ¸·Î 180µµ È¸Àü
+g3=imrotate(f,180); %ì£¼ì–´ì§„ ì˜ìƒì„ ë°˜ì‹œê³„ë°©í–¥ìœ¼ë¡œ 180ë„ íšŒì „
 
-g4=imrotate(f,-45); %ÁÖ¾îÁø ¿µ»óÀ» ½Ã°è¹æÇâÀ¸·Î 45µµ È¸Àü
+g4=imrotate(f,-45); %ì£¼ì–´ì§„ ì˜ìƒì„ ì‹œê³„ë°©í–¥ìœ¼ë¡œ 45ë„ íšŒì „
 
-g5=imrotate(f, -90); %ÁÖ¾îÁø ¿µ»óÀ» ½Ã°è¹æÇâÀ¸·Î 90µµ È¸Àü
+g5=imrotate(f, -90); %ì£¼ì–´ì§„ ì˜ìƒì„ ì‹œê³„ë°©í–¥ìœ¼ë¡œ 90ë„ íšŒì „
 
-g6=imrotate(f, -180); %ÁÖ¾îÁø ¿µ»óÀ» ½Ã°è¹æÇâÀ¸·Î 180µµ È¸Àü 
+g6=imrotate(f, -180); %ì£¼ì–´ì§„ ì˜ìƒì„ ì‹œê³„ë°©í–¥ìœ¼ë¡œ 180ë„ íšŒì „ 
 
-figure, imshow(g2), figure, imshow(g3), figure, imshow(g4), figure, imshow(g5), figure, imshow(g6); %¿µ»óµéÀ» ¸ðµÎ Ãâ·Â 
-%Ãâ·Â °á°ú g2¿Í g5ÀÇ °ªÀÌ °°À½À» È®ÀÎ ÇÒ ¼ö ÀÖ¾úÀ½.
+figure, imshow(g2), figure, imshow(g3), figure, imshow(g4), figure, imshow(g5), figure, imshow(g6); %ì˜ìƒë“¤ì„ ëª¨ë‘ ì¶œë ¥ 
+%ì¶œë ¥ ê²°ê³¼ g2ì™€ g5ì˜ ê°’ì´ ê°™ìŒì„ í™•ì¸ í•  ìˆ˜ ìžˆì—ˆìŒ.
 
-g7=imrotate(f, 315); %ÁÖ¾îÁø ¿µ»óÀ» ¹Ý½Ã°è¹æÇâÀ¸·Î 315µµ È¸Àü
+g7=imrotate(f, 315); %ì£¼ì–´ì§„ ì˜ìƒì„ ë°˜ì‹œê³„ë°©í–¥ìœ¼ë¡œ 315ë„ íšŒì „
 
-imshow(g7), figure, imshow(g4); %g7°ú g4À» °°ÀÌ Ãâ·ÂÇØ º» °á°ú °ªÀÌ °°À½À» È®ÀÎ ÇÒ ¼ö ÀÖ¾úÀ½.
+imshow(g7), figure, imshow(g4); %g7ê³¼ g4ì„ ê°™ì´ ì¶œë ¥í•´ ë³¸ ê²°ê³¼ ê°’ì´ ê°™ìŒì„ í™•ì¸ í•  ìˆ˜ ìžˆì—ˆìŒ.
