@@ -1,5 +1,7 @@
 f=imread('lena.jpg');
-g=imcomplement(f); %¿µ»ó fÀÇ º¸¼ö¸¦ °è»êÇØ ¿µ»óÀÇ »öÀ» ¹ÝÀü½ÃÅ² ÈÄ º¯¼ö g¿¡ ÇÒ´ç
-imshow(g); %º¸¼ö¸¦ »ç¿ëÇØ »öÀ» ¹ÝÀü½ÃÅ² ¿µ»ó Ãâ·Â
-f1=im2double(f); %¿øº» ¿µ»ó µ¥ÀÌÅÍ Å¬·¡½º¸¦ doubleÇüÀ¸·Î º¯È¯ÇÑ °ªÀ» º¯¼ö f1¿¡ ÇÒ´ç
-f2=im2double(g);%º¯¼ö gÀÇ µ¥ÀÌÅÍ Å¬·¡½º¸¦ doubleÇüÀ¸·Î º¯È¯ÇÑ °ªÀ» º¯¼ö f2¿¡ ÇÒ´ç
+g=imcomplement(f); %ì˜ìƒ fì˜ ë³´ìˆ˜ë¥¼ ê³„ì‚°í•´ ì˜ìƒì˜ ìƒ‰ì„ ë°˜ì „ì‹œí‚¨ í›„ ë³€ìˆ˜ gì— í• ë‹¹
+imshow(g); %ë³´ìˆ˜ë¥¼ ì‚¬ìš©í•´ ìƒ‰ì„ ë°˜ì „ì‹œí‚¨ ì˜ìƒ ì¶œë ¥
+f1=im2double(f); %ì›ë³¸ ì˜ìƒ ë°ì´í„° í´ëž˜ìŠ¤ë¥¼ doubleí˜•ìœ¼ë¡œ ë³€í™˜í•œ ê°’ì„ ë³€ìˆ˜ f1ì— í• ë‹¹
+f2=im2double(g);%ë³€ìˆ˜ gì˜ ë°ì´í„° í´ëž˜ìŠ¤ë¥¼ doubleí˜•ìœ¼ë¡œ ë³€í™˜í•œ ê°’ì„ ë³€ìˆ˜ f2ì— í• ë‹¹
+
+%ë³´ìˆ˜ë¥¼ ê³„ì‚°í•˜ëŠ” ê³¼ì •ì´ ì–´ë–»ê²Œ ë˜ëŠ”ì§€ ëª¨ë¥´ê² ì–´ì„œ í•œ ë²ˆ ì°¾ì•„ë³´ë ¤ê³  í•©ë‹ˆë‹¤.
