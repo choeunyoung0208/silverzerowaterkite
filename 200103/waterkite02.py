@@ -63,3 +63,41 @@ c / 4 = 200 / 4 = 50.0 : c를 4로 나눗셈
 따라서 일부 실수간의 연산 결과가 실제 결과값의 근사값으로 반올림 오차가 발생한다.
 """
 # print(0.1 + 0.2)  # 0.30000000000000004 : 실제 계산 값 0.3의 근사값을 출력
+
+# 표준 입력 함수 : input() 함수
+# print("Enter your name:")  # Enter your name: : 이름을 입력하라는 문구 출력
+# somebody = input()  # 변수 somebody에 저장해놓을 값을 사용자가 입력 (입력을 완료할 때까지 대기)
+# print("Hi", somebody, "How are you today?")  # Hi [입력받은 값] How are you today? : 입력받은 somebody를 이용하여 출력
+"""
+입력 함수 input()를 이용하기 전, 지시문을 출력할 때 출력 함수 print()를 사용하였으나,
+input() 함수에 바로 지시문을 넣을 수 있다.
+"""
+# temperature = float(input("온도를 입력하세요: "))  # 온도를 입력하세요:
+"""
+온도를 입력하라는 문구와 함께 입력 대기
+-> 수를 입력받으면 그 값을 정수형으로 변환
+-> 변수 temperature에 해당하는 값을 할당
+"""
+# print(temperature)  # 입력받은 temperature 출력
+
+# 표준 출력 함수 : print() 함수
+# print("Hello world!", "Hello again!!!")  # Hello world! Hello again!!! : print() 안에 콤마 사용 -> 두 문장 연결되어 출력
+
+# 실습 : 화씨온도 변환기
+"""
+input() 함수, print() 함수, 사칙연산 이용
+화씨온도(℉) = (섭씨온도(℃) * 1.8) + 32
+"""
+# print("본 프로그램은 섭씨온도를 화씨온도로 변환하는 프로그램입니다.")  # 프로그램 설명 문구 출력
+# celsius = input("섭씨온도(℃)를 입력하세요: ")  # 섭씨온도(℃)를 입력하세요:
+"""
+섭씨온도를 입력받으라는 문구와 함께 입력 대기
+-> 변수 celsius에 입력받은 수를 할당
+"""
+# fahrenheit = (float(celsius) * 1.8) + 32
+"""
+celsius에 입력받은 값은 실수형으로 변환
+-> 섭씨온도를 이용하여 화씨온도를 구하는 공식을 이용한 연산
+-> 변수 fahrenheit에 해당하는 값 할당
+"""
+# print("섭씨온도(℃):", celsius, "℃ 화씨온도(℉):", fahrenheit, "℉")
