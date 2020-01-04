@@ -1,13 +1,23 @@
-%matlab 내장함수 histeq와 같은 역할을 하는 함수 생성
+%명령창
 
 %다 끝내고 싶었지만....다 끝내지 못해...일단은 여기까지만...
 
 f=imread('lena.jpg');
+
 %[counts,binLocations] = imhist(f) 명령어를 사용해 영상 f의 각 그레이 레벨에 해당되는 빈도수(픽셀수) 확인
 %counts : 히스토그램 도수
 %binLocations : Bin 위치(영상 f의 그레이 레벨 스펙트럼)
 %f : 평활화될 영상
 [counts, binLocations]=imhist(f); %원본 영상의 각 그레이 레벨에 해당되는 픽셀수 확인
+
+a=size(binLocations);
+
+ans = make_histeq(f, a(1) ,counts);
+
+----------------------------------------------------------------------------------------------------------------------
+%편집기
+
+%matlab 내장함수 histeq와 같은 역할을 하는 함수 생성
 
 function ans = make_histeq(image, num, counts)
 %image : 평활화될 영상
