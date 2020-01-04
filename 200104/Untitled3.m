@@ -12,7 +12,7 @@ f=imread('lena.jpg');
 
 a=size(binLocations);
 
-ans = make_histeq(f, a(1) ,counts);
+ans = make_histeq(f, a(1), counts);
 
 ----------------------------------------------------------------------------------------------------------------------
 %편집기
