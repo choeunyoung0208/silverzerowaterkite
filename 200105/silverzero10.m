@@ -18,8 +18,6 @@ bar(binLocations, counts); title('원본 영상'); %영상 f의 밝기분포 히
 figure, bar(binLocations, make_histeq(f, a(1)-1, counts)); title('평활화된 영상'); 
 %평활화된 영상 f의 밝기분포 히스토그램을 막대 그래프 형태로 출력
 
-%answer = make_histeq(f, a(1), counts);
-
 ----------------------------------------------------------------------------------------------------------------------
 %편집기
 
@@ -60,10 +58,9 @@ end
 %ex) N=1이고 X=1.2345일 경우, 소수점 첫번째 자리까지 반올림 => 1.2의 결과가 나옴
 %N = 0: 가장 가까운 정수로 반올림
 %ex) N=1이고 X=1.2345일 경우, 가장 가까운 정수로 반올림 => 1의 결과가 나옴
-%N < 0: 소수점 왼쪽을 N자릿수로 반올림
 
 for i=1:num+1 %그레이 레벨의 범위는 0~num(최대 그레이 레벨 수). 따라서 num+1개의 요소를 가짐.
-    gray_level2(i)=round(((num)/total_pixel_number)*(accumulated_sum(i)), 0); %변환된 그레이 레벨 값 계산
+    gray_level2(i)=round((num/total_pixel_number)*(accumulated_sum(i)), 0); %변환된 그레이 레벨 값 계산
 end
 
 for i=1:num+1
@@ -79,7 +76,7 @@ end
 
 %equalized image : imhist, imshow 오류
 %직접 만든 함수를 사용해서 평활화한 결과 그래프와 이전에 histeq명령어를 사용해서 평활화한 결과 그래프를 비교해보니 똑같은 것 같기도 하고.. 
-%약간 다른 것 같기도 합니다...
+%약간 다른 것 같기도 합니다... 
 
 
 
