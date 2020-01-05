@@ -1,5 +1,5 @@
 %Equalization이란 영상의 모든 그레이 레벨 값의 빈도수를 비슷하게 만드는 것
-%uint8의 경우 그레이 레벨의 개수는 0~255로 총 256개를 가짐
+%uint8의 경우 그레이 레벨의 범위는 0~255로 총 256개를 가짐
 
 %명령창
 
@@ -26,8 +26,8 @@ figure, bar(binLocations, make_histeq(f, a(1)-1, counts)); title('평활화된 �
 function eq = make_histeq(image, num, counts)
 %image : 평활화될 영상
 
-%num : 최대 그레이 레벨수
-%ex) 0~255인 경우 
+%num : 최대 그레이 레벨
+%ex) 그레이 레벨의 범위가 0~255인 경우 
 %num=255
 
 %count : num의 각 요소에 해당되는 빈도수
@@ -50,7 +50,7 @@ end
 
 %변환된 그레이 레벨 계산(평활화된 그레이 레벨 계산)
 %i번째에서 변환된 그레이 레벨값 = (그레이 레벨 개수-1/총 픽셀수)*(i번째 까지의 빈도수 누적합)을 한 결과를 반올림 하여 정수화
-%따라서 i번째에서 변환된 그레이 레벨값 = ((num)/sum(counts(:))*(accumulated(i))의 결과를 반올림해서 나온 정수
+%따라서 i번째에서 변환된 그레이 레벨값 = ((num)/sum(counts(:))*(accumulated_sum(i))의 결과를 반올림해서 나온 정수
 
 %반올림 하기 위해 round(X,N)명령어 사용. 
 %X : 반올림 할 대상
@@ -59,14 +59,16 @@ end
 %N = 0: 가장 가까운 정수로 반올림
 %ex) N=1이고 X=1.2345일 경우, 가장 가까운 정수로 반올림 => 1의 결과가 나옴
 
-for i=1:num+1 %그레이 레벨의 범위는 0~num(최대 그레이 레벨 수). 따라서 num+1개의 요소를 가짐.
+for i=1:num+1 %그레이 레벨의 범위는 0~num(최대 그레이 레벨). 따라서 num+1개의 요소를 가짐.
     gray_level2(i)=round((num/total_pixel_number)*(accumulated_sum(i)), 0); %변환된 그레이 레벨 값 계산
 end
 
 for i=1:num+1
-    eq(gray_level2(i)+1)=eq(gray_level2(i)+1)+counts(i); %평활화된 그레이 레벨값 각각에 해당되는 픽셀수 계산. 
-    %여기서 1을 더해주는 이유는 그레이 레벨의 범위가 0~num이므로, eq라는 열벡터의 첫번째 요소가 그레이 레벨 0을 가지는
-    %픽셀수기 때문. 따라서 gray_level2(i)의 레벨을 가지는 픽셀수는 eq라는 열벡터의 gray_level2(i)+1번째 요소가 됨.
+    eq(gray_level2(i)+1)=eq(gray_level2(i)+1)+counts(i); 
+    %평활화된 그레이 레벨값 각각에 해당되는 픽셀수 계산. 
+    %여기서 1을 더해주는 이유는 그레이 레벨의 범위가 0~num이므로, 
+    %eq라는 열벡터의 첫번째 요소가 그레이 레벨 0을 가지는 픽셀수기 때문. 
+    %따라서 gray_level2(i)의 레벨을 가지는 픽셀수는 eq라는 열벡터의 gray_level2(i)+1번째 요소가 됨.
 end
 
 end
