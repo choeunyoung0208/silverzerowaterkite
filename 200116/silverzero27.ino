@@ -14,6 +14,8 @@ void setup() {
   attachInterrupt(digitalPinToInterrupt(3), CHA_B, CHANGE);
   attachInterrupt(digitalPinToInterrupt(18), CHB_B, CHANGE);
   attachInterrupt(digitalPinToInterrupt(19), CHB_A, CHANGE);
+  
+  BR.Motor(-255, -255);
 }
 
 void loop() {
