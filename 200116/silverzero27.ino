@@ -16,59 +16,54 @@ void setup() {
   attachInterrupt(digitalPinToInterrupt(19), CHB_A, CHANGE);
 }
 
-void loop() {}
+void loop() {
+if(ccc==1) {ccc=0;
+  int vl=a, vr=b; a=0; b=0; //vl과 vr에 a와 b값을 저장하자마자 a와 b값을 리셋할 수 있음
+  Serial.print(vl); Serial.print(" "); Serial.println(vr);
+  //위의 int vl=a, vr=b; a=0; b=0; 명령어 대신 여기에 a=0; b=0;을 해도 a와 b값을 리셋할 수 있긴 하지만 이것보다 위에 했던것이 더 좋은 명령어!
+  }
+}
 
 void CHA_A () {
   bool p1 = digitalRead(2), p2 = digitalRead(3);
   if (p1 == p2) {
-    //Serial.println("1+"); 
-    a=a-1; //p1과 p2가 같으면 상이 같다는 뜻이므로 정방향
+    a++; //p1과 p2가 같으면 상이 같다는 뜻이므로 정방향
   }
   else {
-    //Serial.println("1-"); 
-    a=a+1;
+    a--;
   }
 }
 
 void CHA_B () {
   bool p1 = digitalRead(2), p2 = digitalRead(3);
   if (p1 == p2) {
-    //Serial.println("1-"); 
-    a=a+1;
+    a--;
   }
   else {
-    //Serial.println("1+"); 
-    a=a-1;
+    a++;
   }
 }
 
 void CHB_A () {
   bool p1 = digitalRead(18), p2 = digitalRead(19);
-  if (p1 == p2) {
-    //Serial.println("2+"); 
-    b=b-1;
+  if (p1 == p2) { 
+    b--;
   }
   else {
-    //Serial.println("2-"); 
-    b=b+1;
+    b++;
   }
 }
 
 void CHB_B () {
   bool p1 = digitalRead(18), p2 = digitalRead(19);
   if (p1 == p2) {
-    //Serial.println("2-"); 
-    b=b+1;
+    b++;
   }
   else {
     //Serial.println("2+"); 
-    b=b-1;
+    b--;
   }
 }
 
 void tim() { ccc=1; 
-Serial.print(a); Serial.print("  ");
-Serial.println(b);
-a=0;
-b=0;
 }
