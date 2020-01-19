@@ -23,7 +23,7 @@ void setup() {
   */
   
   
-  BR.Motor(-255, -255);
+  BR.Motor(-255, -255); //255의 속도로 
 }
 
 void loop() {
@@ -46,10 +46,10 @@ void CHA_A () {
 
 void CHA_B () {
   bool p1 = digitalRead(2), p2 = digitalRead(3);
-  if (p1 == p2) {
+  if (p1 == p2) { //p1과 p2의 값이 같을때 정방향 (-가 앞으로 가는 방향이에요!)
     a--;
   }
-  else {
+  else { //p1과 p2의 값이 다를때 역방향
     a++;
   }
 }
