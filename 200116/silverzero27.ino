@@ -10,10 +10,18 @@ void setup() {
   Serial.begin(500000); BR.Motor_Init(); BR.Gyro_Init();
   Timer3.initialize(10000); Timer3.attachInterrupt(tim);
 
-  attachInterrupt(digitalPinToInterrupt(2), CHA_A, CHANGE); //2번핀과 3번핀이 한 개의 모터에 대한 것이고 18번핀과 19번핀이 또다른 모터에 대한 것인데, 위상들을 보고 정방향인지 역방향인지 판단할 수 있다!
+  attachInterrupt(digitalPinToInterrupt(2), CHA_A, CHANGE); //2번핀과 3번핀이 한 개의 모터에 대한 것이고 18번핀과 19번핀이 또다른 모터에 대한 것인데, 위상들을 보고 정방향인지 역방향인지 판단할 수 있다! 
   attachInterrupt(digitalPinToInterrupt(3), CHA_B, CHANGE);
   attachInterrupt(digitalPinToInterrupt(18), CHB_B, CHANGE);
   attachInterrupt(digitalPinToInterrupt(19), CHB_A, CHANGE);
+  
+  /*CHA_A : A모터(아마도.. 왼쪽 모터)의 A위상.
+  CHA_B : A모터의 B위상.
+  CHB_B : B모터(오른쪽 모터)의 B위상.
+  CHB_A : B모터의 A위상. 
+  A위상과 B위상은 90도 만큼 위상차이가 난다!
+  */
+  
   
   BR.Motor(-255, -255);
 }
@@ -29,7 +37,7 @@ if(ccc==1) {ccc=0;
 void CHA_A () {
   bool p1 = digitalRead(2), p2 = digitalRead(3);
   if (p1 == p2) {
-    a++; //p1과 p2가 같으면 상이 같다는 뜻이므로 정방향
+    a++;
   }
   else {
     a--;
@@ -62,10 +70,15 @@ void CHB_B () {
     b++;
   }
   else {
-    //Serial.println("2+"); 
     b--;
   }
 }
+
+/* 
+위상의 진행방향이 왼쪽에서 오른쪽으로 진행하는 것이 정방향, 오른쪽에서 왼쪽으로 진행하는 것이 역방향.
+그리고, (이건 확실하진 않은데.. 저는 이렇게 들었던 거 같아요..!!) pulse가 0->1 또는 1->0 으로 변할때 마다 다른 위상의 값과 비교.
+ex) CHA_A에서는, 
+A모터의 A위상 값이 0->1 또는 1->0으로 변할때 마다 그 순간 B위상의 값을 확인해서 비교 */
 
 void tim() { ccc=1; 
 }
