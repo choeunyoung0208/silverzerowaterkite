@@ -15,9 +15,9 @@ void setup() {
   attachInterrupt(digitalPinToInterrupt(18), CHB_B, CHANGE);
   attachInterrupt(digitalPinToInterrupt(19), CHB_A, CHANGE);
   
-  /*CHA_A : A모터(아마도.. 왼쪽 모터)의 A위상.
+  /*CHA_A : A모터(오른쪽 모터..)의 A위상.
   CHA_B : A모터의 B위상.
-  CHB_B : B모터(오른쪽 모터)의 B위상.
+  CHB_B : B모터( 모터)의 B위상.
   CHB_A : B모터의 A위상. 
   A위상과 B위상은 90도 만큼 위상차이가 난다!
   */
@@ -78,7 +78,7 @@ void CHB_B () {
 위상의 진행방향이 왼쪽에서 오른쪽으로 진행하는 것이 정방향, 오른쪽에서 왼쪽으로 진행하는 것이 역방향.
 그리고, (이건 확실하진 않은데.. 저는 이렇게 들었던 거 같아요..!!) pulse가 0->1 또는 1->0 으로 변할때 마다 다른 위상의 값과 비교.
 ex) CHA_A에서는, 
-A모터의 A위상 값이 0->1 또는 1->0으로 변할때 마다 그 순간 B위상의 값을 확인해서 비교 */
+A모터의 A위상 값이 0->1 또는 1->0으로 변할때 마다 그 순간  B위상의 값을 확인해서 비교 */
 
 void tim() { ccc=1; 
 }
