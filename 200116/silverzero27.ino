@@ -36,10 +36,10 @@ if(ccc==1) {ccc=0;
 
 void CHA_A () {
   bool p1 = digitalRead(2), p2 = digitalRead(3);
-  if (p1 == p2) {
+  if (p1 == p2) { //p1과 p2의 값이 같을때 역방향
     a++;
   }
-  else {
+  else { //p1과 p2의 값이 다를때 정방향
     a--;
   }
 }
