@@ -85,3 +85,25 @@ tuple8=tuple(list)
 print(tuple8)
 #★결과
 #(1, 2, 3, 'a', 'b')
+
+
+
+
+
+#+추가
+#5. tuple=('a', 'b', 'c') 가 있을 경우
+#tuple.append(40), tuple[0]=40, del(tuple[0]) 모두 사용 불가
+#이유 : 튜플을 읽기 전용이므로!
+
+
+
+
+
+#6. 튜플 삭제하기
+#튜플 자체는 del() 함수를 이용해서 삭제할 수 있음
+#ex) del(tuple)
+tuple=('a', 'b', 'c')
+del(tuple)
+print(tuple)
+#★결과
+#<class 'tuple'>
