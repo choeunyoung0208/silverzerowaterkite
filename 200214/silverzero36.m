@@ -1,19 +1,19 @@
 %2)System Solution and Simulation
 
 close all 
-%close : ÁöÁ¤µÈ Figure Á¦°Å
-%close allÀº ÇÚµéÀÌ ¼û°ÜÁöÁö ¾ÊÀº ¸ðµç Figure¸¦ »èÁ¦ÇÕ´Ï´Ù. ÇÚµéÀÌ ¹«¾ùÀÏ±î..? ¾Ë¾Æº¾½Ã´Ù
+%close : ì§€ì •ëœ Figure ì œê±°
+%close allì€ í•¸ë“¤ì´ ìˆ¨ê²¨ì§€ì§€ ì•Šì€ ëª¨ë“  Figureë¥¼ ì‚­ì œí•©ë‹ˆë‹¤.
 clear all
-%ÀÛ¾÷ °ø°£¿¡¼­ Ç×¸ñÀ» Á¦°ÅÇÏ¿© ½Ã½ºÅÛ ¸Þ¸ð¸® ´Ã¸®±â
-%clear´Â ÇöÀç ÀÛ¾÷ °ø°£¿¡¼­ ¸ðµç º¯¼ö¸¦ Á¦°ÅÇÏ¿© ½Ã½ºÅÛ ¸Þ¸ð¸®¿¡¼­ ÇØÁ¦ÇÕ´Ï´Ù.
+%ìž‘ì—… ê³µê°„ì—ì„œ í•­ëª©ì„ ì œê±°í•˜ì—¬ ì‹œìŠ¤í…œ ë©”ëª¨ë¦¬ ëŠ˜ë¦¬ê¸°
+%clearëŠ” í˜„ìž¬ ìž‘ì—… ê³µê°„ì—ì„œ ëª¨ë“  ë³€ìˆ˜ë¥¼ ì œê±°í•˜ì—¬ ì‹œìŠ¤í…œ ë©”ëª¨ë¦¬ì—ì„œ í•´ì œí•©ë‹ˆë‹¤.
 clc
 
 %Initilization
 th_int=[-pi/2 pi/2]; %initial positions
 ths=[pi/2 -pi/2]; %set-points => final positions
 
-x0=[0 0 th_int 0 0 0 0]; %states initial values(ÃÊ±â°ª) 
-%ÃÊ±â°ªÀ» ÀÌ¿ëÇØ¼­ ODEÀÇ »ó¼öµé(ÀûºÐ»ó¼ö °°Àº°Íµé)À» Æ¯Á¤°ªÀ¸·Î °áÁ¤ÇØÁÜ
+x0=[0 0 th_int 0 0 0 0]; %states initial values(ì´ˆê¸°ê°’) 
+%ì´ˆê¸°ê°’ì„ ì´ìš©í•´ì„œ ODEì˜ ìƒìˆ˜ë“¤(ì ë¶„ìƒìˆ˜ ê°™ì€ê²ƒë“¤)ì„ íŠ¹ì •ê°’ìœ¼ë¡œ ê²°ì •í•´ì¤Œ
 Ts=[0 20]; %time span
 
 %Robot Specifications
@@ -36,28 +36,28 @@ Ki2=10;
 Kpid=[Kp1 Kd1 Ki1 Kp2 Kd2 Ki2];
 
 %ODE solving
-%ode45 ¸¦ »ç¿ëÇØ ODE Ç®±â
+%ode45 ë¥¼ ì‚¬ìš©í•´ ODE í’€ê¸°
 %[t,y] = ode45(odefun,tspan,y0)
-%odefun : Ç®°í½ÍÀº odeÇÔ¼ö
-%tspan = [t0 tf] &  y0 : t0¿¡¼­ tf±îÁöÀÇ ±¸°£¿¡¼­ ÃÊ±â Á¶°Ç y0À» »ç¿ëÇÏ¿© ¿¬¸³¹ÌºÐ¹æÁ¤½Ä y¡Ç=f(t,y)¸¦ ÀûºÐÇÔ
-%ÇØ ¹è¿­ yÀÇ °¢ ÇàÀº ¿­ º¤ÅÍ t¿¡ ¹ÝÈ¯µÈ °ª¿¡ ´ëÀÀÇÔ
+%odefun : í’€ê³ ì‹¶ì€ odeí•¨ìˆ˜
+%tspan = [t0 tf] &  y0 : t0ì—ì„œ tfê¹Œì§€ì˜ êµ¬ê°„ì—ì„œ ì´ˆê¸° ì¡°ê±´ y0ì„ ì‚¬ìš©í•˜ì—¬ ì—°ë¦½ë¯¸ë¶„ë°©ì •ì‹ yâ€²=f(t,y)ë¥¼ ì ë¶„í•¨
+%í•´ ë°°ì—´ yì˜ ê° í–‰ì€ ì—´ ë²¡í„° tì— ë°˜í™˜ëœ ê°’ì— ëŒ€ì‘í•¨
 
 [T, X]=ode45(@(t, x) r2dof(t, x, ths, spec, Kpid), Ts, x0); 
-%µ¶¸³º¯¼ö°¡ 2°³ÀÎ r2dof(t, x, ths, spec, Kpid)ÇÔ¼ö¿¡ ´ëÇÏ¿© Ts±¸°£¿¡¼­ ÃÊ±â Á¶°Ç x0À» »ç¿ëÇÏ¿© ode Ç®±â
+%ë…ë¦½ë³€ìˆ˜ê°€ 2ê°œì¸ r2dof(t, x, ths, spec, Kpid)í•¨ìˆ˜ì— ëŒ€í•˜ì—¬ Tsêµ¬ê°„ì—ì„œ ì´ˆê¸° ì¡°ê±´ x0ì„ ì‚¬ìš©í•˜ì—¬ ode í’€ê¸°
 
-%Output (±¸ÇÏ°í ½ÍÀº °Í!)
-th1=X(:, 3); %theta1 waveform. ½Ã°£ T¿¡ ´ëÇÑ °¢µµ1
-th2=X(:, 4); %theta2 waveform. ½Ã°£ T¿¡ ´ëÇÑ °¢µµ2
+%Output (êµ¬í•˜ê³  ì‹¶ì€ ê²ƒ!)
+th1=X(:, 3); %theta1 waveform. ì‹œê°„ Tì— ëŒ€í•œ ê°ë„1
+th2=X(:, 4); %theta2 waveform. ì‹œê°„ Tì— ëŒ€í•œ ê°ë„2
 
 %torque inputs computation from the 7th, 8th states inside ODE
-%Èû F1°ú F2¸¦ r2dof.m¿¡¼­ x'7°ú x'8ÀÎ ¹ÌºÐ°ªÀ¸·Î Á¤ÀÇÇßÀ¸¹Ç·Î, diff(Â÷ºÐ) ÇÔ¼ö¸¦ »ç¿ëÇÏ¿© ±¸ÇÏ±â
+%íž˜ F1ê³¼ F2ë¥¼ r2dof.mì—ì„œ x'7ê³¼ x'8ì¸ ë¯¸ë¶„ê°’ìœ¼ë¡œ ì •ì˜í–ˆìœ¼ë¯€ë¡œ, diff(ì°¨ë¶„) í•¨ìˆ˜ë¥¼ ì‚¬ìš©í•˜ì—¬ êµ¬í•˜ê¸°
 
-%º¤ÅÍ ¿ä¼Ò °£ÀÇ Â÷ºÐ
-%Y=diff(X) : X¿¡ ´ëÇØ Â÷ºÐÀ» °è»êÇÔ. YÀÇ ¿ä¼Ò´Â XÀÇ ÀÎÁ¢ ¿ä¼Ò °£ÀÇ Â÷ºÐ°á°ú·Î Xº¸´Ù ¿ä¼Ò°¡ ÇÏ³ª ´õ Àû°Ô Ãâ·ÂµÊ
-%ex) X=[1 1 2 3 5 8 13 21]¿¡¼­ Y = diff(X)¸¦ ÇÏ¸é 
-%°á°ú : Y=[0  1  1  2  3  5  8]
+%ë²¡í„° ìš”ì†Œ ê°„ì˜ ì°¨ë¶„
+%Y=diff(X) : Xì— ëŒ€í•´ ì°¨ë¶„ì„ ê³„ì‚°í•¨. Yì˜ ìš”ì†ŒëŠ” Xì˜ ì¸ì ‘ ìš”ì†Œ ê°„ì˜ ì°¨ë¶„ê²°ê³¼ë¡œ Xë³´ë‹¤ ìš”ì†Œê°€ í•˜ë‚˜ ë” ì ê²Œ ì¶œë ¥ë¨
+%ex) X=[1 1 2 3 5 8 13 21]ì—ì„œ Y = diff(X)ë¥¼ í•˜ë©´ 
+%ê²°ê³¼ : Y=[0  1  1  2  3  5  8]
 
-F1=diff(X(:, 7))./diff(T); %ºÐ¸ð¿Í ºÐÀÚ ¸ðµÎ ½ºÄ®¶ó°¡ ¾Æ´Ñ º¤ÅÍÀÌ¹Ç·Î ¼ººÐº° ³ª´°¼À(./) »ç¿ë. F1=xdot(7)=X(:, 7)./diff(T)
+F1=diff(X(:, 7))./diff(T); %ë¶„ëª¨ì™€ ë¶„ìž ëª¨ë‘ ìŠ¤ì¹¼ë¼ê°€ ì•„ë‹Œ ë²¡í„°ì´ë¯€ë¡œ ì„±ë¶„ë³„ ë‚˜ëˆ—ì…ˆ(./) ì‚¬ìš©. F1=xdot(7)=X(:, 7)./diff(T)
 F2=diff(X(:, 8))./diff(T); %F2=xdot(8)=X(:, 8)./diff(T)
 tt=0:(T(end)/(length(F1)-1)):T(end);
 
@@ -68,7 +68,7 @@ x2=L1*sin(th1)+L2*sin(th1+th2); %X2
 y2=L1*cos(th1)+L2*cos(th1+th2); %Y2
 
 %theta1 error plot
-plot(T, ths(1)-th1) %xÃà : T, yÃà : ths(1)-th1
+plot(T, ths(1)-th1) %xì¶• : T, yì¶• : ths(1)-th1
 grid;
 title('Theta-1 error');
 xlabel('time (sec)');
