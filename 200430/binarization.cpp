@@ -6,7 +6,7 @@ using namespace std;
 
 int main()
 {
-	//★Read data from an image file★
+	//★Read data from an image file
 	ifstream inFile("C:\\Users\\5111s\\Desktop\\으녕.pgm", ios::binary);
 	/*파일 읽기를 담당하는 클래스 : ifstream(input file stream)
 	파일을 읽기위해 파일 입력(읽기)을 담당하는 클래스인 ifstream클래스로 inFile 객체를 생성하고, 물리적 파일(으녕.pgm)과 연결함.
@@ -28,11 +28,11 @@ int main()
 
 	//Read 2nd line (1315, 1498)
 	//영상의 크기를 알려주는 부분. 1315는 폭(가로 길이), 1498은 높이(세로 길이)를 나타냄.
-	int numCols, numRows;  
+	int numCols, numRows;
 	inFile >> numCols >> numRows;
-	/*영상의 폭: 행렬의 열 갯수에 해당. 
-	영상의 높이: 행렬의 행 갯수에 해당.
-	따라서, inFile로 부터 첫번째로 읽어온 값을 numCols에 넣어주고, 두번째로 읽어온 값을 numRows에 넣어줌. 
+	/*영상의 폭: 행렬의 열 개수에 해당.
+	영상의 높이: 행렬의 행 개수에 해당.
+	따라서, inFile로 부터 첫번째로 읽어온 값을 numCols에 넣어주고, 두번째로 읽어온 값을 numRows에 넣어줌.
 	공백 전까지를 하나의 값으로 읽어옴!(공백으로 다음 글자를 구분함.)
 	int가 4bytes이므로, 4bytes(RAM memory에서 4칸에 해당)를 읽어서 숫자(정수형)로 바꾼 다음에 numCols와 numRows에 넣어줌.
 	이 역할은 '>>' extraction operator가 함.*/
@@ -54,10 +54,9 @@ int main()
 
 	unsigned char* data1D = new unsigned char[numCols * numRows * sizeof(unsigned char)]; //동적 메모리 할당 명령어. 
 	/*
-	unsigned char* data1D 
+	unsigned char* data1D
 	=> new함수가 data1D라는 변수에 동적 메모리를 할당한 부분의 시작 주소를 알려준다. 그래서 data1D는 포인터로 선언.
 	data1D가 가리키는 RAM의 주소로 가서 1byte씩 저장할 것이므로, unsigned char로 선언.
-
 	new unsigned char[numCols * numRows * sizeof(unsigned char)];
 	=> new + datatype[RAM공간에 할당해야 될 크기(byte단위)]
 	따라서, numCols * numRows * sizeof(unsigned char)bytes만큼의 공간을 확보함.*/
@@ -66,7 +65,7 @@ int main()
 
 	//★픽셀값들을 읽어서 RAM으로 가져오기(Read raw data)
 	inFile.read(reinterpret_cast<char*>(data1D), numCols * numRows * sizeof(unsigned char));
-	/*파일(inFile)에서 file pointer가 가리키고 있는 주소로 가서 numCols * numRows * sizeof(unsigned char)bytes만큼의 데이터를 읽은 다음, 
+	/*파일(inFile)에서 file pointer가 가리키고 있는 주소로 가서 numCols * numRows * sizeof(unsigned char)bytes만큼의 데이터를 읽은 다음,
 	data1D가 가리키는 주소로 copy해줌.
 	reinterpret_cast<char*>(data1D)
 	=> RAM에서 쓰고있는 pointer와 inFile에서 쓰고있는 file pointer를 호환되게하기위해서, 형변환을 해줌.*/
@@ -139,4 +138,6 @@ int main()
 
 	cout << "영상처리 완료." << endl;
 
+	return 0;
 }
+
