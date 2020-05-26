@@ -1,102 +1,206 @@
-#include <iostream> //for cin, cout
-#include <string> //for string handling
-#include <fstream> //for file read write
+//21812009 ì¡°ì€ì˜
+#include <iostream> //í‚¤ë³´ë“œ, ëª¨ë‹ˆí„°ì˜ ì…ì¶œë ¥ì„ ë‹´ë‹¹í•˜ëŠ” iostream í´ë˜ìŠ¤ë¥¼ ë¶ˆëŸ¬ì˜´.
+#include <string> //ë¬¸ìì—´ ë°ì´í„°ë¥¼ ì‚¬ìš©í•˜ê¸° ìœ„í•´ string í´ë˜ìŠ¤(ë˜ëŠ” ë¼ì´ë¸ŒëŸ¬ë¦¬ ë¼ê³ í•¨)ë¥¼ ë¶ˆëŸ¬ì˜´.
+#include <fstream> //íŒŒì¼ ì…ì¶œë ¥(ì½ê¸°, ì“°ê¸°)ì„ ë‹´ë‹¹í•˜ëŠ” fstream í´ë˜ìŠ¤ë¥¼ ë¶ˆëŸ¬ì˜´.
 
 using namespace std;
 
-int main()
+void readImage(string fname, unsigned char* b, int* c, int* d, int* e) //ì…ë ¥ì€ call-by-value. ì¶œë ¥ì€ pointer ì‚¬ìš©.
 {
-	//Read data from an image file
-	//ÆÄÀÏÀ» ÀĞ±â¸¦ À§ÇÑ Å¬·¡½º : ifstream(input file stream)
-	ifstream inFile("C:\\deep.pgm", ios::in | ios::binary);
-	//½ÇÇàÇØ¼­ µ¿ÀÛÇÏ¸é, ÆÄÀÏÀÌ ÀĞÈù°Í.
+	//â˜…íŒŒì¼ ì½ê¸°
 
-	//Read 1st line (P5)
-	string inputLine;
-	getline(inFile, inputLine); //inFIle¿¡¼­ ÇÑ ÁÙ(\n±îÁö)À» ÀĞ¾î¼­ inputLine¿¡ ÀúÀåÇÔ.
-	cout << inputLine << endl;
+	ifstream inFile(fname, ios::binary);
 
-	//¾î¶² °æ¿ì´Â # ---¶ó´Â ¾È³» ¹®±¸°¡ µé¾î°¡´Â °æ¿ì°¡ ÀÖÀ½. ÀÌ °æ¿ì¿¡´Â ÇÑ ÁÙ ´õ ÀĞ¾î³»¾ßµÊ.
-	//ÆÄÀÏÀ» ¸Ş¸ğÀå¿¡ ³Ö¾îº¸°í ¾Ë±â.
-	//getline(inFile, inputLine);
+	/*íŒŒì¼ ì½ê¸°ë¥¼ ë‹´ë‹¹í•˜ëŠ” í´ë˜ìŠ¤ : ifstream(input file stream)
+	íŒŒì¼ì„ ì½ê¸°ìœ„í•´ íŒŒì¼ ì…ë ¥(ì½ê¸°)ì„ ë‹´ë‹¹í•˜ëŠ” í´ë˜ìŠ¤ì¸ ifstreamí´ë˜ìŠ¤ë¡œ inFile ê°ì²´ë¥¼ ìƒì„±í•˜ê³ , ë¬¼ë¦¬ì  íŒŒì¼ê³¼ ì—°ê²°í•¨.
+	ì‚¬ìš©í•˜ëŠ” íŒŒì¼ì´ ì´ì§„íŒŒì¼ì´ë¯€ë¡œ ios::binaryë¼ëŠ” flagë¥¼ ë„£ì–´ binaryë¡œ ì½ëŠ”ë‹¤ëŠ” ê²ƒì„ ì•Œë ¤ì¤˜ì•¼ ëœë‹¤.*/
 
-	//Read 2nd line (1000, ***)
-	int numCols, numRows;
-	inFile >> numCols >> numRows;
-	//int°¡ 4bytesÀÌ¹Ç·Î, 4bytes(disk memoryÀÇ? 4Ä­?)À» ÀĞ¾î¼­ ¼ıÀÚ(Á¤¼öÇü)·Î ¹Ù²Û ´ÙÀ½¿¡ numCols¿Í numRows¿¡ ³Ö¾îÁÜ
-	cout << numCols << ' ' << numRows << endl;
+	//===============================================================================================================================================
 
-	//Read 3rd line (max value)
-	//max value´Â bit data°¡ ÇÈ¼¿´ç 8bitsÀÎÁö 16bitsÀÎÁö ¾Ë·ÁÁÖ´Â Áß¿äÇÑ ÁöÇ¥.
+	//â˜…ì˜ìƒ í—¤ë” ì½ê¸° 
+
+	/*ë©”ëª¨ì¥ìœ¼ë¡œ íŒŒì¼ì˜ í—¤ë”ë¶€ë¶„ì„ í™•ì¸í•œ ê²°ê³¼
+	P5
+	1315  1498
+	255
+	=> í”½ì…€ê°’ë“¤ì„ ì½ì–´ì˜¤ê¸° ì „ì— ìœ„ì˜ í—¤ë”ë¥¼ ì½ì–´ì™€ì•¼ëœë‹¤!
+	*/
+
+	string inputLine; //ì²«ë²ˆì§¸ ë¬¸ì¥ì„ í•œ ë²ˆì— ì½ì–´ì˜¤ê¸° ìœ„í•´, string í´ë˜ìŠ¤ë¥¼ ì‚¬ìš©í•´ ë¬¸ìì—´ì„ ë°›ëŠ” ê°ì²´ inputLineì„ ë§Œë“¦.
+	getline(inFile, inputLine); //inFIleë¡œë¶€í„° í•œ ì¤„(\nê¹Œì§€)ì„ ì½ì–´ì„œ inputLineì— ì €ì¥í•¨.
+	int numCols, numRows; 
+	inFile >> numCols >> numRows; //inFileì—ì„œ 1315 1498ê°’ì„ ì½ê³ , numCols numRows ê°ê°ì— ë„£ì–´ì¤Œ. (ê³µë°±ìœ¼ë¡œ ì…ë ¥ êµ¬ë¶„)
+	c = &numRows;
+	d = &numCols;
 	int maxValue;
-	inFile >> maxValue; //inFile¿¡¼­ ÀĞ´Âµ¥, °ø¹éÀ¸·Î ´ÙÀ½ ±ÛÀÚ¸¦ ±¸ºĞ.
-	//±×·¡¼­, ´ÙÀ½ °ø¹é±îÁö ÀĞ¾î³½ ´ÙÀ½(=/= disk memoryÀÇ 4Ä­..?) ¿¡ ¹Ù²ã¼­ maxValue·Î ³Ö¾îÁÜ µé¾î°¡¾ß µÉ °ø°£ÀÌ intÀÌ±â ¶§¹®¿¡, ÀÌ·¸°Ô ¾Ë¾Æ¼­ ¹Ù²ãÁÜ. '>>' ¾ê°¡!
-	cout << maxValue;
+	inFile >> maxValue; //inFileë¡œë¶€í„° 255ë¥¼ ì½ì–´ì˜´.
+	e = &maxValue;
 
-	//End of header
+	//===============================================================================================================================================
 
-	//prepare dynamic memory to store image data (RAM spaceÀÇ HEAP? ¿µ¿ª¿¡´Ù°¡ ÇÊ¿äÇÑ ¿ë·® ¸¸Å­ ÇÒ´ç)
-	//RAM ¿µ¿ª¿¡´Ù°¡ ÀúÀåÇØ¾ß µÉ °ø°£À» ¹Ì¸® È®º¸ÇØ³õÀ½.
-	unsigned char* data1D = new unsigned char[numCols * numRows * sizeof(unsigned char)]; //µ¿Àû ¸Ş¸ğ¸® ÇÒ´ç..? C++¿¡¼­´Â newÇÔ¼ö¸¦ »ç¿ëÇÔ.
-	//Æ÷ÀÎÅÍ¸¦ ÃÊ±âÈ­¸¦ ÇÏ±â À§ÇØ new¶ó´Â ÇÔ¼ö¸¦ »ç¿ë => ½ÃÀÛÁÖ¼Ò¸¦ return ÇØÁÖ´Â °ÍÀÌ data1D¿¡ ÀúÀåµÊ
-	//[] ¾ÈÀÇ ´ÜÀ§´Â byte => new°¡ numCols * numRows * sizeof(unsigned char)bytes¸¦ È®º¸ÇÔ..
+	//â˜…ì˜ìƒ ë°ì´í„°ë¥¼ ì½ì–´ì„œ RAMê³µê°„ì— ì €ì¥í•˜ê¸° ìœ„í•´ ë™ì  ë©”ëª¨ë¦¬ í• ë‹¹
 
-	//Read raw data
+	unsigned char* data1D = new unsigned char[numCols * numRows * sizeof(unsigned char)]; //ë™ì  ë©”ëª¨ë¦¬ í• ë‹¹. 
+	
+	/*
+	unsigned char* data1D
+	=> newí•¨ìˆ˜ê°€ data1Dë¼ëŠ” ë³€ìˆ˜ì— ë™ì  ë©”ëª¨ë¦¬ë¥¼ í• ë‹¹í•œ ë¶€ë¶„ì˜ ì‹œì‘ ì£¼ì†Œë¥¼ ì•Œë ¤ì¤€ë‹¤. ê·¸ë˜ì„œ data1DëŠ” í¬ì¸í„°ë¡œ ì„ ì–¸.
+	=> í¬ì¸í„°ê°€ ì ‘ê·¼í•  ë°ì´í„°ì˜ ë°ì´í„°íƒ€ì…ì´ unsigned charì´ë¯€ë¡œ, unsigned char*ë¡œ í¬ì¸í„° ë§Œë“¦.
+
+	new unsigned char[numCols * numRows * sizeof(unsigned char)];
+	=> new + datatype[RAMê³µê°„ì— í• ë‹¹í•´ì•¼ ë  í¬ê¸°(byteë‹¨ìœ„)]
+	ë”°ë¼ì„œ, numCols * numRows * sizeof(unsigned char)bytesë§Œí¼ì˜ ê³µê°„ì„ í™•ë³´í•¨.
+	*/
+
+	//===============================================================================================================================================
+
+	//â˜…í”½ì…€ê°’ë“¤ì„ ì½ì–´ì„œ RAMìœ¼ë¡œ(ë™ì  ë©”ëª¨ë¦¬ í• ë‹¹í•œ ê³³ìœ¼ë¡œ) ê°€ì ¸ì˜¤ê¸°
+
 	inFile.read(reinterpret_cast<char*>(data1D), numCols * numRows * sizeof(unsigned char));
-	//file pointer°¡ °¡¸®Å°°í ÀÖ´Â ÁÖ¼Ò(ÆÄÀÏ ¸Ş¸ğ¸®?)·Î °¡¼­ numCols * numRows * sizeof(unsigned char)bytes¸¸Å­À» ÀĞÀº ´ÙÀ½, data1DÁÖ¼Ò(RAM ¸Ş¸ğ¸®?)·Î copyÇØÁÜ..
 
-	//end of file
-	inFile.close(); //decrease file counter to 0
+	/*
+	íŒŒì¼(inFile)ì—ì„œ file pointerê°€ ê°€ë¦¬í‚¤ê³  ìˆëŠ” ì£¼ì†Œë¡œ ê°€ì„œ numCols * numRows * sizeof(unsigned char)bytesë§Œí¼ì˜ ë°ì´í„°ë¥¼ ì½ì€ ë‹¤ìŒ,
+	data1Dê°€ ê°€ë¦¬í‚¤ëŠ” ì£¼ì†Œë¡œ copyí•´ì¤Œ.
 
-	//RAMÀ¸·Î °®°í¿ÔÀ½====================================================
+	reinterpret_cast<char*>(data1D)
+	=> RAMì—ì„œ ì“°ê³ ìˆëŠ” pointerì™€ inFileì—ì„œ ì“°ê³ ìˆëŠ” file pointerë¥¼ í˜¸í™˜ë˜ê²Œí•˜ê¸°ìœ„í•´ì„œ, í˜•ë³€í™˜ì„ í•´ì¤Œ.
+	*/
 
-	//image processing: binarization
-	//2Â÷¿ø ¹è¿­ ÇüÅÂ·Î ÀĞ¾î³¿
-	for (int row = 0; row < numRows; row++)
+	inFile.close(); //íŒŒì¼ì„ ë‹¤ ì½ì€ ë‹¤ìŒ, close()í•¨ìˆ˜ë¥¼ ì‚¬ìš©.
+	//usage counterë¥¼ 0ìœ¼ë¡œ ë°”ê¿”ì£¼ëŠ” ì—­í• ì„ í•´, ë‹¤ë¥¸ ì‚¬ëŒë“¤ì´ ì ‘ê·¼í•  ìˆ˜ ìˆìŒì„ ì•Œë ¤ì¤Œ.
+
+	//===============================================================================================================================================
+
+	//â˜…ì½ì–´ì˜¨ í”½ì…€ ë°ì´í„° ê°’ì„ ì¶œë ¥í•˜ê¸°
+	for (int row = 0; row < numRows; row++) //0<=row<1498ì˜ ì¡°ê±´ì„ ë§Œì¡±í•˜ë©´ ë°˜ë³µë¬¸ ì‹¤í–‰. 1498ë²ˆ ë°˜ë³µ.
 	{
-		for (int col = 0; col < numCols; col++)
+		for (int col = 0; col < numCols; col++) //0<=col<1315ì˜ ì¡°ê±´ì„ ë§Œì¡±í•˜ë©´ ë°˜ë³µë¬¸ ì‹¤í–‰. 1315ë²ˆ ë°˜ë³µ.
 		{
-			//cout << '(' << row << ',' << col << ')' << int(data1D[row * numCols + col]);
-			//data1D[row*numCols+col]ÀÌ·¸°Ô ÀĞÀº°Ô byteÀÌ¹Ç·Î, ÀÌ°É intÇüÀ¸·Î ¹Ù²Ş.
-
-			//¿©±â´Â ¿Ö int°¡ ¾Æ´ÏÁö?
-			//data1D[row*numCols+col] : data1DÀÇ row*numCols+col¹øÁöÀÇ µ¥ÀÌÅÍ °ªÀÏÅÙµ¥,ÀÌ ÀÚÃ¼´Â data1DÀÇ datatypeÀÌ charÀÌ¹Ç·Î, ¹®ÀÚ·Î Ãâ·ÂµÊ? ¼ıÀÚ·Î ³ª¿Íµµ ¼ıÀÚ=/=¹®ÀÚ?
-			if (data1D[row * numCols + col] > 100) //binarization (gray : 8bits, binary : 1bit)
-				data1D[row * numCols + col] = 255;
-			else
-				data1D[row * numCols + col] = 0;
+			b[row * numCols + col] = data1D[row * numCols + col];
 		}
-		//cout << row << endl;
 	}
-	cout << "Processed!" << endl;
 
-	//Save the result into pgm image
-	//ÆÄÀÏÀ» ÀúÀåÇÏ±â À§ÇÑ Å¬·¡½º : ofstream
-	ofstream outFile;
-	outFile.open("processed.pgm", ios::binary);
+}
 
-	//check the file
-	//¾²±â°¡ ¹®Á¦¾ø´ÂÁö È®ÀÎ
-	if (!outFile) //outFileÀÌ¶ó´Â °´Ã¼°¡ 0ÀÌ ¾Æ´Ñ°É returnÇØ¾ß Á¤»óÀûÀÎ°Å. 1ÀÌ¸é ½ÇÇàÇÏ´Â °Í °°À½..
+void imageProcessInversion(unsigned char* b, int numRows, int numCols)
+{
+	//â˜…ì˜ìƒì²˜ë¦¬ : ë°˜ì „
+	for (int row = 0; row < numRows; row++) //0<=row<1498ì˜ ì¡°ê±´ì„ ë§Œì¡±í•˜ë©´ ë°˜ë³µë¬¸ ì‹¤í–‰. 1498ë²ˆ ë°˜ë³µ.
 	{
-		cout << "Cannot open" << endl;
-		exit(1); //..?
+		for (int col = 0; col < numCols; col++) //0<=col<1315ì˜ ì¡°ê±´ì„ ë§Œì¡±í•˜ë©´ ë°˜ë³µë¬¸ ì‹¤í–‰. 1315ë²ˆ ë°˜ë³µ.
+		{
+			b[row * numCols + col] = 255 - b[row * numCols + col];
+		}
 	}
-	cout << "File opened to write" << endl;
+}
 
-	//Write head
-	outFile << "P5" << endl; //outFileÀÌ¶ó´Â °´Ã¼¿¡´Ù°¡ '<<' ÇØÁÖ¸é P5¶ó´Â ¹®ÀÚ¿­ÀÌ ½áÁü.
+void imageProcessBinarization(unsigned char* b, int numRows, int numCols)
+{
+	//â˜…ì˜ìƒì²˜ë¦¬ : ì´ì§„í™”
+	for (int row = 0; row < numRows; row++) //0<=row<1498ì˜ ì¡°ê±´ì„ ë§Œì¡±í•˜ë©´ ë°˜ë³µë¬¸ ì‹¤í–‰. 1498ë²ˆ ë°˜ë³µ.
+	{
+		for (int col = 0; col < numCols; col++) //0<=col<1315ì˜ ì¡°ê±´ì„ ë§Œì¡±í•˜ë©´ ë°˜ë³µë¬¸ ì‹¤í–‰. 1315ë²ˆ ë°˜ë³µ.
+		{
+			if (b[row * numCols + col] > 128)
+				b[row * numCols + col] = 255; //b[row*numCols+col] ê°’ì´ 128ë³´ë‹¤ í° ê²½ìš° ê°’ì„ 255ë¡œ ë°”ê¿”ì¤Œ. (í°)
+			else
+				b[row * numCols + col] = 0; //b[row*numCols+col] ê°’ì´ 128ë³´ë‹¤ ì‘ê±°ë‚˜ ê°™ì€ ê²½ìš° ê°’ì„ 0ìœ¼ë¡œ ë°”ê¿”ì¤Œ. (ê²€)
+		}
+	}
+}
+
+void writeImage(string fname, unsigned char* b, int numRows, int numCols, int maxValue)
+{
+	//â˜…ì˜ìƒì²˜ë¦¬ í•œ íŒŒì¼ì„ .pgmíŒŒì¼ë¡œ ì €ì¥í•˜ê¸°.
+	ofstream outFile; 
+
+	/*
+	íŒŒì¼ì„ ì €ì¥í•˜ê¸° ìœ„í•œ í´ë˜ìŠ¤ : ofstream
+	íŒŒì¼ì„ ì €ì¥í•˜ê¸° ìœ„í•´ ofstream í´ë˜ìŠ¤ë¥¼ ì´ìš©í•´ outFileê°ì²´ë¥¼ ë§Œë“¦.
+	*/
+
+	outFile.open(fname, ios::binary); //ë…¼ë¦¬ì  íŒŒì¼(outFile)ê³¼ ë¬¼ë¦¬ì  íŒŒì¼ì„ ì—°ê²°í•´ì¤Œ. ì´ì§„íŒŒì¼ë¡œ ì €ì¥í•˜ë¯€ë¡œ, ios::binaryë¼ëŠ” flagë¥¼ ì ì–´ì¤Œ.
+
+	//===============================================================================================================================================
+
+	//â˜…íŒŒì¼ ì“°ê¸° ì˜¤ë¥˜ í™•ì¸
+	//íŒŒì¼ì„ ì €ì¥í•˜ëŠ”ë° ì˜¤ë¥˜ê°€ ìˆëŠ”ì§€ í™•ì¸í•˜ê¸° ìœ„í•´!
+
+	if (!outFile) //outFileì´ë¼ëŠ” ê°ì²´ê°€ 0ì´ ì•„ë‹Œ ê°’ì„ returní•´ì•¼ ì •ìƒì ì¸ ê²ƒ! outFileì´ 0ì„ returní•˜ë©´ íŒŒì¼ì„ ì €ì¥í•˜ëŠ” ê²ƒì— ì˜¤ë¥˜ê°€ ìˆìŒ.
+	{
+		cout << "íŒŒì¼ ì“°ê¸° ì˜¤ë¥˜." << endl; //íŒŒì¼ì„ ì €ì¥í•  ë•Œ ì˜¤ë¥˜ê°€ ìˆìœ¼ë©´ ì‹¤í–‰.
+		exit(1); //errorë¥¼ ì•Œë ¤ì£¼ê³ , í”„ë¡œê·¸ë¨ ì¢…ë£Œ.
+	}
+	cout << "íŒŒì¼ì„ ì“°ê¸° ìœ„í•´ íŒŒì¼ ì—´ê¸° ì„±ê³µ." << endl; //íŒŒì¼ì„ ì €ì¥í•  ë•Œ ì˜¤ë¥˜ê°€ ì—†ìœ¼ë©´ ì‹¤í–‰.
+
+	//===============================================================================================================================================
+
+	//â˜…íŒŒì¼ ì“°ê¸°
+	//íŒŒì¼ì„ ì“°ëŠ”ë° ë¬¸ì œê°€ ì—†ìœ¼ë©´ ì‹¤í–‰.
+
+
+	//â˜…íŒŒì¼ ì“°ê¸° : í—¤ë” ë¶€ë¶„ ì‘ì„±
+	//ì²˜ìŒì— ì½ì—ˆë˜ í—¤ë”ë¶€ë¶„ê³¼ ê°™ê²Œ ì‘ì„±í•˜ë©´ ëœë‹¤!
+	outFile << "P5" << endl; //outFile ê°ì²´ì— 'P5' ì…ë ¥.
 	outFile << numCols << " " << numRows << endl;
 	outFile << maxValue << endl;
-	cout << "Finished to write header" << endl;
 
-	outFile.write(reinterpret_cast<char*>(data1D), numCols * numRows * sizeof(unsigned char));
-	//data1D ÁÖ¼ÒºÎÅÍ ½ÃÀÛÇØ¼­ numCols * numRows * sizeof(unsigned char)bytes ¸¸Å­ ÀĞ¾î¼­ outFile¿¡ ¾²±â.
-	//RAM¿¡¼­ ¾²°íÀÖ´Â pointer¿Í outFile¿¡¼­ ¾²°íÀÖ´Â file pointer¸¦ È£È¯µÇ°ÔÇÏ±âÀ§ÇØ¼­, Çüº¯È¯ ÇØÁÜ. data1D =>  reinterpret_cast<char*>(data1D)
 
-	//ÆÄÀÏÀ» ¾²±âÀ§ÇØ¼­ ¿­°í, ´Ù ³¡³ÂÀ¸¸é ´İ¾Æ¾ßµÊ..±×·¡¾ß ÀĞ¾îº¼ ¼ö ÀÖÀ½.....
-	outFile.close(); //ÆÄÀÏ ´İ±â
+	//â˜…íŒŒì¼ ì“°ê¸° : í”½ì…€ ë°ì´í„°ê°’ ì‘ì„± 
+	outFile.write(reinterpret_cast<const char*>(b), numCols * numRows * sizeof(unsigned char));
+	/*RAMê³µê°„ì˜ bì£¼ì†Œë¶€í„° ì‹œì‘í•´ì„œ numCols * numRows * sizeof(unsigned char)bytes ë§Œí¼ ì½ì–´ì„œ outFileì— ì“°ê¸°.
+	reinterpret_cast<const char*>(data1D)
+	=> RAMì—ì„œ ì“°ê³ ìˆëŠ” pointerì™€ outFileì—ì„œ ì“°ê³ ìˆëŠ” file pointerë¥¼ í˜¸í™˜ë˜ê²Œí•˜ê¸°ìœ„í•´ì„œ í˜•ë³€í™˜ì„ í•´ì¤Œ. constëŠ” RAMì— ìˆëŠ” ë°ì´í„°ë¥¼ ê·¸ëŒ€ë¡œ ì½ì–´ì˜¤ê¸°ìœ„í•´(read only) */
 
-	cout << "Finished" << endl;
+	outFile.close(); //íŒŒì¼ ì“°ê¸°ë¥¼ ì™„ë£Œí•œ ê²½ìš° close()í•¨ìˆ˜ë¥¼ ì´ìš©í•´ íŒŒì¼ì„ ë‹«ì•„ì£¼ê¸°. 
 
+	delete(b); //ë™ì  ë©”ëª¨ë¦¬ë¥¼ í• ë‹¹í•´ì¤€ê²ƒì€ í•­ìƒ deleteë¡œ ì§€ì›Œì•¼ëœë‹¤.
+}
+
+int main()
+{
+	cout << "21812009 ì¡°ì€ì˜" << endl;
+
+	string ifname; //ì˜ìƒì²˜ë¦¬í•  íŒŒì¼ëª…ì„ ì…ë ¥ë°›ê¸° ìœ„í•´ string classë¥¼ ì‚¬ìš©í•˜ì—¬ ë³€ìˆ˜ë¥¼ ë§Œë“¦.
+	cout << "ì˜ìƒì²˜ë¦¬í•  íŒŒì¼ëª…ì„ ì…ë ¥í•´ì£¼ì„¸ìš” : ";
+	getline(cin, ifname); //ì‚¬ìš©ìë¡œë¶€í„° ì…ë ¥ì„ ë°›ì€ ê²ƒì˜ í•œ ì¤„(\nê¹Œì§€)ì„ ì½ì–´ì„œ ifnameì— ì €ì¥í•¨.
+
+	unsigned char* a = NULL; //readImageí•¨ìˆ˜ë¥¼ ì‚¬ìš©í•´ ì˜ìƒì²˜ë¦¬í•  íŒŒì¼ë¡œë¶€í„° ì½ì€ í”½ì…€ ë°ì´í„°ê°’ì„ ë°›ì„ ë°°ì—´ì„ ë§Œë“¦.
+	int rows, cols, max;
+	readImage(ifname, a, &rows, &cols, &max); //íŒŒì¼ì„ ì½ê²Œ í•´ì£¼ëŠ” í•¨ìˆ˜ readImageë¥¼ í˜¸ì¶œ. aëŠ” ë°°ì—´ëª…ì´ë¯€ë¡œ ì£¼ì†Œì„.
+
+	int input;
+	
+	while (1)
+	{
+		cout << "ì˜ìƒì²˜ë¦¬í•  ì¢…ë¥˜ë¥¼ ì„ íƒí•´ì£¼ì„¸ìš”.(1 : Inversion, 2 : Binarization) : ";
+		cin >> input;
+
+		if (input == 1)
+		{
+			imageProcessInversion(a, rows, cols);
+			break;
+		}
+
+		else if (input == 2)
+		{
+			imageProcessBinarization(a, rows, cols);
+			break;
+		}
+
+		else
+		{
+			cout << "\në‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”." << endl;
+		}
+	}
+
+	string ofname; //ì˜ìƒì²˜ë¦¬í•œ íŒŒì¼ì„ ì €ì¥í•  ë•Œ ì €ì¥í•  ì´ë¦„ì„ ì…ë ¥ë°›ê¸° ìœ„í•´ string classë¥¼ ì‚¬ìš©í•˜ì—¬ ë³€ìˆ˜ë¥¼ ë§Œë“¦.
+	cout << "ì €ì¥í•  íŒŒì¼ëª…ì„ ì…ë ¥í•´ì£¼ì„¸ìš” : ";
+	cin.ignore();
+	getline(cin, ofname); //ì‚¬ìš©ìë¡œë¶€í„° ì…ë ¥ì„ ë°›ì€ ê²ƒì˜ í•œ ì¤„(\nê¹Œì§€)ì„ ì½ì–´ì„œ ofnameì— ì €ì¥í•¨.
+
+	writeImage(ofname, a, rows, cols, max); //íŒŒì¼ì„ ì“°ê²Œ í•´ì£¼ëŠ” í•¨ìˆ˜ writeImageë¥¼ í˜¸ì¶œ. aëŠ” ë°°ì—´ëª…ì´ë¯€ë¡œ ì£¼ì†Œì„.
+	
+
+	return 0;
 }
