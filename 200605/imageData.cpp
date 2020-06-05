@@ -1,5 +1,5 @@
-//21812009 Á¶Àº¿µ
-//class ±¸ÇöºÎ
+//21812009 ì¡°ì€ì˜
+//class êµ¬í˜„ë¶€
 
 #include "imageData.h"
 #include <iostream>
@@ -13,14 +13,14 @@ imageData::imageData(string fname)
 	ifstream inFile(fname, ios::binary);
 
 
-	//¡Ú¿µ»ó Çì´õ ÀĞ±â
+	//â˜…ì˜ìƒ í—¤ë” ì½ê¸°
 
 	getline(inFile, a);
 	inFile >> cols >> rows;
 	inFile >> maxvalue;
 
 
-	//¡Úµ¿Àû ¸Ş¸ğ¸® ÇÒ´ç
+	//â˜…ë™ì  ë©”ëª¨ë¦¬ í• ë‹¹
 	pixelValues = new unsigned char[rows * cols * sizeof(unsigned char)]; 
 	pixelProcessed = new unsigned char[rows * cols * sizeof(unsigned char)]; 
 
@@ -56,14 +56,12 @@ int imageData::imageProc(int Mode)
 
 	case 2: //my image processing method
 
-		unsigned char b=0;
-
 		for (int row = 0; row < rows; row++)
 		{
 			for (int col = 0; col < cols; col++)
 			{
 				pixelProcessed[row * cols + col] = pixelValues[row * cols + col]/2;
-				//¿øº» ¿µ»óÀÇ µ¥ÀÌÅÍ °ªÀ» ¸ğµÎ 2·Î ³ª´² ¿øº» ¿µ»óº¸´Ù ´õ ¾îµÎ¿î ¿µ»óÀ» Ãâ·ÂÇÏ°Ô ÇÔ.
+				//ì›ë³¸ ì˜ìƒì˜ ë°ì´í„° ê°’ì„ ëª¨ë‘ 2ë¡œ ë‚˜ëˆ  ì›ë³¸ ì˜ìƒë³´ë‹¤ ë” ì–´ë‘ìš´ ì˜ìƒì„ ì¶œë ¥í•˜ê²Œ í•¨.
 			}
 		}
 
@@ -84,7 +82,7 @@ int imageData::imageWrite(string fname)
 
 	outFile.close();
 
-	cout << "¿µ»ó ÀúÀå ¿Ï·á." << endl;
+	cout << "ì˜ìƒ ì €ì¥ ì™„ë£Œ." << endl;
 
 	return 0;
 }
